@@ -13,9 +13,7 @@ implement quantized bert, if error:
   
 
 TRAINING
-
 create train.sh
-
 new:
 nlp-train transformer_glue \
     --task_name mrpc \
@@ -41,9 +39,7 @@ nlp_architect train transformer_glue \
     --overwrite_output_dir
 
 EVALUATION
-
 create eval.sh
-
 new:
 nlp-inference transformer_glue \
     --model_path /tmp/mrpc-8bit \
