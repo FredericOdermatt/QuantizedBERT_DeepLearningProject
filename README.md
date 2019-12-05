@@ -8,11 +8,14 @@ pip install -e .  # install in developer mode
 implement quantized bert, if error:
 
   pip install python-dateutil==2.6
+  
   pip uninstall transformers 
+  
   pip install transformers==2.0
   
 
 TRAINING
+
 create train.sh
 new:
 nlp-train transformer_glue \
@@ -39,6 +42,7 @@ nlp_architect train transformer_glue \
     --overwrite_output_dir
 
 EVALUATION
+
 create eval.sh
 new:
 nlp-inference transformer_glue \
