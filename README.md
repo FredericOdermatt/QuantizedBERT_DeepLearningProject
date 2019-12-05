@@ -13,6 +13,7 @@ implement quantized bert, if error:
   
   pip install transformers==2.0
   
+  possibly pip install wheel & tensorflow==2.0.0b0
 
 TRAINING
 
