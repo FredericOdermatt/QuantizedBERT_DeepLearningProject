@@ -65,4 +65,24 @@ nlp_architect run transformer_glue \
     --do_lower_case \
     --overwrite_output_dir \
     --evaluate
+    
+  Creating a Python Virtual Environment
+IMPORTANT! If you have set the PYTHONPATH variable, you will need to unset it to avoid any conflicts with packages.
+You can do that on a bash shell with:
+unset PYTHONPATH
+There are two types of Python distribution in the HPC cluster:
+
+System Python
+Python from a Module
+Virtual environment is only supported with Python module versions, not for the System Python.
+
+NOTE: Whenever you want to use a Python Virtual Environment, you need to load the corresponding Python module.
+
+Environment that uses System Packages on cluster:
+
+python3 -m venv mynewenv --system-site-packages
+
+installing nlp-architect on cluster:
+
+python3 -m pip install -e .
 
