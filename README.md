@@ -69,14 +69,23 @@ nlp_architect run transformer_glue \
 # Training on a cluster
 
 rsync -Pav ~/deeplearning/glue_data/ odermafr@euler.ethz.ch:/cluster/home/odermafr/glue_data
+
 ssh -Y odermafr@euler.ethz.ch
+
 module load python/3.6.1
+
 (python3.6 -m pip3 install -U --user pip setuptools virtualenv) #not sure if necessary, doesn't hurt
+
 python3.6 -m venv .env --system-site-packages    # --system-site-packages seems to be key to not get version collisions
+
 source .env/bin/activate
+
 pip install nlp-architect==0.5.1
+
 (pip install --user torchvision==0.3.0) #if necessary
+
 (pip install --user torch==1.3.1) #if necessary
+
 nano v0.5.1train.sh
 
 INSERT THIS TEXT
@@ -93,5 +102,6 @@ INSERT THIS TEXT
         --do_lower_case
  
  chmod 777 v0.5.1train.sh
+ 
  ./v0.5.1train.sh
 
