@@ -66,23 +66,32 @@ nlp_architect run transformer_glue \
     --overwrite_output_dir \
     --evaluate
     
-  Creating a Python Virtual Environment
-IMPORTANT! If you have set the PYTHONPATH variable, you will need to unset it to avoid any conflicts with packages.
-You can do that on a bash shell with:
-unset PYTHONPATH
-There are two types of Python distribution in the HPC cluster:
+# Training on a cluster
 
-System Python
-Python from a Module
-Virtual environment is only supported with Python module versions, not for the System Python.
+rsync -Pav ~/deeplearning/glue_data/ odermafr@euler.ethz.ch:/cluster/home/odermafr/glue_data
+ssh -Y odermafr@euler.ethz.ch
+module load python/3.6.1
+(python3.6 -m pip3 install -U --user pip setuptools virtualenv) #not sure if necessary, doesn't hurt
+python3.6 -m venv .env --system-site-packages    # --system-site-packages seems to be key to not get version collisions
+source .env/bin/activate
+pip install nlp-architect==0.5.1
+(pip install --user torchvision==0.3.0) #if necessary
+(pip install --user torch==1.3.1) #if necessary
+nano v0.5.1train.sh
 
-NOTE: Whenever you want to use a Python Virtual Environment, you need to load the corresponding Python module.
+INSERT THIS TEXT
 
-Environment that uses System Packages on cluster:
-
-python3 -m venv mynewenv --system-site-packages
-
-installing nlp-architect on cluster:
-
-python3 -m pip install -e .
+    nlp_architect train transformer_glue \
+        --task_name cola \
+        --model_name_or_path bert-base-uncased \
+        --model_type quant_bert \
+        --learning_rate 2e-5 \
+        --num_train_epochs 1 \
+        --output_dir ~/tmp/cola-8bit \
+        --evaluate_during_training \
+        --data_dir ~/glue_data/CoLA \
+        --do_lower_case
+ 
+ chmod 777 v0.5.1train.sh
+ ./v0.5.1train.sh
 
