@@ -1,0 +1,14 @@
+glue_data,Meaning of name,Type of Task,--task-name,Euler 1 epoch,time (s),Max memory (MB),Evaluation,Euler 3 epoch
+CoLA,Corpus of Linguistic Acceptability,single sentence,cola,yes,21000,6717,,yes
+MNLI,Multi-Genre Natural Language Inference Corpus,Inference,mnli,Code 1,20,,,
+MNLI,Multi-Genre… Mismatched,Inference,mnli-mm,Code 1,20,,,
+QNLI,"Stanford Question Answering Dataset (==squad??, has v2!)",Inference,qnli,run out of time,12h,6589,,
+RTE,Recognizing Textual Entailment,Inference,rte,yes,3223,6457,,
+SST-2,Stanford Sentiment Treebank,single sentence,sst-2,probably time out,12h,,,
+STS-B,Semantic Textual Similarity Benchmark,similarity,sts-b,Code 1,,,,
+WNLI,Winograd Schema Challenge,Inference,wnli,yes,705,6439,,
+,Microsoft Research Paraphrase Corpus,similarity,mrpc,,,,,
+QQP,Quora Question Pairs,similarity,qqp,data set was not there,,,,
+,,,,,,,,
+SNLI,,,,,,,,
+diagnostic,,,,,,,,
