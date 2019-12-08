@@ -114,15 +114,16 @@ INSERT THIS TEXT
  bsub -o ~/tmp/rte-8bit/ -W 24:00 -n 1 -R "rusage[mem=8196]" < 0.5.1trainRTE.sh
  
  **Why nlp-architect==0.5.2 currently not used**
+ 
  because of 
- AttributeError: 'QuantizedBertLayer' object has no attribute 'is_decoder'
+ `AttributeError: 'QuantizedBertLayer' object has no attribute 'is_decoder'` 
 
  
  # Capabilities of nlp-architect
  
  v.0.5.1
  
- nlp_architect train transformer_glue [-h] --task_name TASK_NAME
+ `nlp_architect train transformer_glue [-h] --task_name TASK_NAME
                                             --data_dir DATA_DIR --model_type
                                             {bert,quant_bert,xlnet,xlm}
                                             --output_dir OUTPUT_DIR
@@ -150,5 +151,5 @@ INSERT THIS TEXT
                                             [--logging_steps LOGGING_STEPS]
                                             [--save_steps SAVE_STEPS]
                                             [--eval_all_checkpoints]
-                                            [--seed SEED]
+                                            [--seed SEED]`
 
