@@ -75,8 +75,8 @@ ssh -Y odermafr@euler.ethz.ch
 NOTE: using module avail python you will see, that before this command python/3.7.1 is not available, however after loading python3.6.0 using module avail python again we see new higher options
 
 module load python/3.6.0 (these commands need to be redone on every startup of the euler)
-
-module load python/3.7.1 (any python > 3.6.0 will do)
+module load python/3.6.1 (you can only load python 3.6.1 once you have loaded python 3.6.0 (I dont know why)
+module unload python/3.6.0
 
 (python3.6 -m pip3 install -U --user pip setuptools virtualenv) #necessary for first time virtualenv setup
 
@@ -86,9 +86,9 @@ source .env/bin/activate
 
 pip install nlp-architect==0.5.1
 
-(pip install (--user) torchvision==0.3.0) #if necessary
+pip install (--user) torchvision==0.3.0 # necessary
 
-(pip install (--user) torch==1.3.1) #if necessary
+(pip install (--user) torch==1.3.1) #probably not necessary, rerun pip install nlp-architect==0.5.1 to check if necessary
 
 nano v0.5.1trainCoLA.sh
 
@@ -112,4 +112,43 @@ INSERT THIS TEXT
  or as a job f.ex:
  
  bsub -o ~/tmp/rte-8bit/ -W 24:00 -n 1 -R "rusage[mem=8196]" < 0.5.1trainRTE.sh
+ 
+ **Why nlp-architect==0.5.2 currently not used**
+ because of 
+ AttributeError: 'QuantizedBertLayer' object has no attribute 'is_decoder'
+
+ 
+ # Capabilities of nlp-architect
+ 
+ v.0.5.1
+ 
+ nlp_architect train transformer_glue [-h] --task_name TASK_NAME
+                                            --data_dir DATA_DIR --model_type
+                                            {bert,quant_bert,xlnet,xlm}
+                                            --output_dir OUTPUT_DIR
+                                            [--tokenizer_name TOKENIZER_NAME]
+                                            [--max_seq_length MAX_SEQ_LENGTH]
+                                            [--cache_dir CACHE_DIR]
+                                            [--do_lower_case]
+                                            [--per_gpu_eval_batch_size PER_GPU_EVAL_BATCH_SIZE]
+                                            [--no_cuda]
+                                            [--overwrite_output_dir]
+                                            [--overwrite_cache]
+                                            --model_name_or_path
+                                            MODEL_NAME_OR_PATH
+                                            [--config_name CONFIG_NAME]
+                                            [--evaluate_during_training]
+                                            [--per_gpu_train_batch_size PER_GPU_TRAIN_BATCH_SIZE]
+                                            [--gradient_accumulation_steps GRADIENT_ACCUMULATION_STEPS]
+                                            [--learning_rate LEARNING_RATE]
+                                            [--weight_decay WEIGHT_DECAY]
+                                            [--adam_epsilon ADAM_EPSILON]
+                                            [--max_grad_norm MAX_GRAD_NORM]
+                                            [--num_train_epochs NUM_TRAIN_EPOCHS]
+                                            [--max_steps MAX_STEPS]
+                                            [--warmup_steps WARMUP_STEPS]
+                                            [--logging_steps LOGGING_STEPS]
+                                            [--save_steps SAVE_STEPS]
+                                            [--eval_all_checkpoints]
+                                            [--seed SEED]
 
