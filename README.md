@@ -72,9 +72,13 @@ rsync -Pav ~/deeplearning/glue_data/ odermafr@euler.ethz.ch:/cluster/home/oderma
 
 ssh -Y odermafr@euler.ethz.ch
 
-module load python/3.6.1
+NOTE: using module avail python you will see, that before this command python/3.7.1 is not available, however after loading python3.6.0 using module avail python again we see new higher options
 
-(python3.6 -m pip3 install -U --user pip setuptools virtualenv) #not sure if necessary, doesn't hurt
+module load python/3.6.0 (these commands need to be redone on every startup of the euler)
+
+module load python/3.7.1 (any python > 3.6.0 will do)
+
+(python3.6 -m pip3 install -U --user pip setuptools virtualenv) #necessary for first time virtualenv setup
 
 python3.6 -m venv .env --system-site-packages    # --system-site-packages seems to be key to not get version collisions
 
@@ -82,11 +86,11 @@ source .env/bin/activate
 
 pip install nlp-architect==0.5.1
 
-(pip install --user torchvision==0.3.0) #if necessary
+(pip install (--user) torchvision==0.3.0) #if necessary
 
-(pip install --user torch==1.3.1) #if necessary
+(pip install (--user) torch==1.3.1) #if necessary
 
-nano v0.5.1train.sh
+nano v0.5.1trainCoLA.sh
 
 INSERT THIS TEXT
 
@@ -101,7 +105,11 @@ INSERT THIS TEXT
         --data_dir ~/glue_data/CoLA \
         --do_lower_case
  
- chmod 777 v0.5.1train.sh
+ chmod 777 v0.5.1trainCoLA.sh
  
- ./v0.5.1train.sh
+ ./v0.5.1trainCoLA.sh
+ 
+ or as a job f.ex:
+ 
+ bsub -o ~/tmp/rte-8bit/ -W 24:00 -n 1 -R "rusage[mem=8196]" < 0.5.1trainRTE.sh
 
