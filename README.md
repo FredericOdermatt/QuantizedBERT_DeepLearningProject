@@ -123,33 +123,33 @@ INSERT THIS TEXT
  
  v.0.5.1
  
- `nlp_architect train transformer_glue [-h] --task_name TASK_NAME
-                                            --data_dir DATA_DIR --model_type
-                                            {bert,quant_bert,xlnet,xlm}
-                                            --output_dir OUTPUT_DIR
-                                            [--tokenizer_name TOKENIZER_NAME]
-                                            [--max_seq_length MAX_SEQ_LENGTH]
-                                            [--cache_dir CACHE_DIR]
-                                            [--do_lower_case]
-                                            [--per_gpu_eval_batch_size PER_GPU_EVAL_BATCH_SIZE]
-                                            [--no_cuda]
-                                            [--overwrite_output_dir]
-                                            [--overwrite_cache]
-                                            --model_name_or_path
-                                            MODEL_NAME_OR_PATH
-                                            [--config_name CONFIG_NAME]
-                                            [--evaluate_during_training]
-                                            [--per_gpu_train_batch_size PER_GPU_TRAIN_BATCH_SIZE]
-                                            [--gradient_accumulation_steps GRADIENT_ACCUMULATION_STEPS]
-                                            [--learning_rate LEARNING_RATE]
-                                            [--weight_decay WEIGHT_DECAY]
-                                            [--adam_epsilon ADAM_EPSILON]
-                                            [--max_grad_norm MAX_GRAD_NORM]
-                                            [--num_train_epochs NUM_TRAIN_EPOCHS]
-                                            [--max_steps MAX_STEPS]
-                                            [--warmup_steps WARMUP_STEPS]
-                                            [--logging_steps LOGGING_STEPS]
-                                            [--save_steps SAVE_STEPS]
-                                            [--eval_all_checkpoints]
+ `nlp_architect train transformer_glue [-h] --task_name TASK_NAME  
+                                            --data_dir DATA_DIR --model_type  
+                                            {bert,quant_bert,xlnet,xlm}  
+                                            --output_dir OUTPUT_DIR  
+                                            [--tokenizer_name TOKENIZER_NAME]  
+                                            [--max_seq_length MAX_SEQ_LENGTH]  
+                                            [--cache_dir CACHE_DIR]  
+                                            [--do_lower_case]  
+                                            [--per_gpu_eval_batch_size PER_GPU_EVAL_BATCH_SIZE]  
+                                            [--no_cuda]  
+                                            [--overwrite_output_dir]  
+                                            [--overwrite_cache]  
+                                            --model_name_or_path  
+                                            MODEL_NAME_OR_PATH  
+                                            [--config_name CONFIG_NAME]  
+                                            [--evaluate_during_training]  
+                                            [--per_gpu_train_batch_size PER_GPU_TRAIN_BATCH_SIZE]  
+                                            [--gradient_accumulation_steps GRADIENT_ACCUMULATION_STEPS]  
+                                            [--learning_rate LEARNING_RATE]  
+                                            [--weight_decay WEIGHT_DECAY]  
+                                            [--adam_epsilon ADAM_EPSILON]  
+                                            [--max_grad_norm MAX_GRAD_NORM]  
+                                            [--num_train_epochs NUM_TRAIN_EPOCHS]  
+                                            [--max_steps MAX_STEPS]  
+                                            [--warmup_steps WARMUP_STEPS]  
+                                            [--logging_steps LOGGING_STEPS]  
+                                            [--save_steps SAVE_STEPS]  
+                                            [--eval_all_checkpoints]  
                                             [--seed SEED]`
 
