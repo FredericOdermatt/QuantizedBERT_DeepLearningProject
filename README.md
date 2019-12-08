@@ -122,8 +122,17 @@ INSERT THIS TEXT
  # Capabilities of nlp-architect
  
  v.0.5.1
+ run
+ - nlp_architect
+ - nlp_architect train
+ - nlp_architect train transformer_glue -h
  
- nlp_architect train transformer_glue [-h] --task_name TASK_NAME  
+ for different levels of help
+ 
+ ALL FLAGS:
+ 
+ nlp_architect train transformer_glue  
+ [---task_name TASK_NAME]    
                                             --data_dir DATA_DIR --model_type  
                                             {bert,quant_bert,xlnet,xlm}  
                                             --output_dir OUTPUT_DIR  
