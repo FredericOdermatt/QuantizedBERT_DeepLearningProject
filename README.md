@@ -123,7 +123,7 @@ INSERT THIS TEXT
  
  v.0.5.1
  
- `nlp_architect train transformer_glue [-h] --task_name TASK_NAME  
+ nlp_architect train transformer_glue [-h] --task_name TASK_NAME  
                                             --data_dir DATA_DIR --model_type  
                                             {bert,quant_bert,xlnet,xlm}  
                                             --output_dir OUTPUT_DIR  
@@ -151,5 +151,5 @@ INSERT THIS TEXT
                                             [--logging_steps LOGGING_STEPS]  
                                             [--save_steps SAVE_STEPS]  
                                             [--eval_all_checkpoints]  
-                                            [--seed SEED]`
+                                            [--seed SEED]
 
