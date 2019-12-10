@@ -111,7 +111,7 @@ INSERT THIS TEXT
  
  or as a job f.ex:
  
- bsub -o ~/tmp/rte-8bit/rte-8bit-1epoc.out -W 24:00 -n 1 -R "rusage[mem=8196]" < 0.5.1trainRTE.sh
+ bsub -W 24:00 -n 1 -R "rusage[mem=8196]" < 0.5.1trainRTE.sh
  
  **Why nlp-architect==0.5.2 currently not used**
  
