@@ -5,8 +5,6 @@ import numpy as np
 import torch
 from torch.optim.optimizer import Optimizer
 
-eps=1e-10
-
 class INQScheduler(object):
     """Handles the the weight partitioning and group-wise quantization stages
     of the incremental network quantization procedure.
@@ -39,7 +37,6 @@ class INQScheduler(object):
         self.iterative_steps = iterative_steps
         self.strategy = strategy
         self.idx = 0
-        alpha =
 
         for group in self.optimizer.param_groups:
             group['ns'] = []
@@ -50,10 +47,16 @@ class INQScheduler(object):
                     group['ns'].append((0, 0))
                     continue
                 
-                s = torch.max(torch.abs(p.data)).item()           
-                n_1 = math.floor(math.log((4*s)/3 + eps, 2))		#added epsilon, so as not to take log of zero
-                n_2 = int(n_1 + 1 - (2**(group['weight_bits']-1))/2)
-                group['ns'].append((n_1, n_2))
+                alpha = list()
+                beta = list()
+                r = p.data.flatten()
+                for i in range(0,group['weight_bits']-1):
+                    a = torch.avg(torch.abs(p.data)).item()
+                    b = torch.sign(p.data)
+                    r = p.data - a_0 * b_0
+                    alpha.append(a)
+                    beta.append(b)
+                group['ns'].append(alpha,beta)
 
     def state_dict(self):
         """Returns the state of the scheduler as a :class:`dict`.
@@ -81,36 +84,20 @@ class INQScheduler(object):
                     continue
                 T = group['Ts'][idx]
                 ns = group['ns'][idx]
-                quantizer = partial(self.quantize_weight, n_1=ns[0], n_2=ns[1], weight_bits=group['weight_bits'])
+                quantizer = partial(self.quantize_weight, alphas=ns, weight_bits=group['weight_bits'])
                 fully_quantized = p.data.clone().cpu().apply_(quantizer).cuda()
                 p.data = torch.where(T == 0, fully_quantized, p.data)
 
-    def quantize_weight(self, weight, n_1, n_2, weight_bits):
-        """Quantize with alternating multibit quant
+    def quantize_weight(self, weight, alphas, weight_bits):
+        """Quantize with alternating multibit quant: search the BST
         """
-        """
-        
-        """
-        """Quantize a single weight using Linear quantization.
-        """
-        """
-        scale = 2**-6
-        k = math.floor(weight/scale + .5)
-        unclamped_q_weight = scale * k
-        quantized_weight = max(min(unclamped_q_weight, 127./64.), -127./64.)
-        """
-        """Quantize a single weight using the INQ quantization scheme.
-        """
-        alpha = 0
-        beta = 2 ** n_2
-        abs_weight = math.fabs(weight)
         quantized_weight = 0
-
-        for i in range(n_2, n_1 + 1):
-            if (abs_weight >= (alpha + beta) / 2) and abs_weight < (3*beta/2):
-                quantized_weight = math.copysign(beta, weight)
-            alpha = 2 ** i
-            beta = 2 ** (i + 1)
+        for i in range(0,len(alphas)-1):
+            if weight < quantized_weight:
+                quantized_weight -= alphas[i+1]
+            else:
+                quantized_weight += alphas[i+1]
+            
         return quantized_weight
 
     def step(self):
