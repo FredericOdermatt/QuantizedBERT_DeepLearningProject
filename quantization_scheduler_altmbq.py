@@ -56,7 +56,7 @@ class INQScheduler(object):
                     r = p.data - a * b
                     alpha.append(a)
                     beta.append(b)
-                group['ns'].append(alpha,beta)
+                group['ns'].append((alpha,beta))
 
     def state_dict(self):
         """Returns the state of the scheduler as a :class:`dict`.
