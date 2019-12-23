@@ -48,15 +48,13 @@ class INQScheduler(object):
                     continue
                 
                 alpha = list()
-                beta = list()
                 r = p.data.flatten()
                 for i in range(0,group['weight_bits']-1):
                     a = torch.mean(torch.abs(p.data)).item()
                     b = torch.sign(p.data)
                     r = p.data - a * b
                     alpha.append(a)
-                    beta.append(b)
-                group['ns'].append((alpha,beta))
+                group['ns'].append(alpha)
 
     def state_dict(self):
         """Returns the state of the scheduler as a :class:`dict`.
