@@ -53,7 +53,7 @@ class INQScheduler(object):
                 for i in range(0,group['weight_bits']-1):
                     a = torch.mean(torch.abs(p.data)).item()
                     b = torch.sign(p.data)
-                    r = p.data - a_0 * b_0
+                    r = p.data - a * b
                     alpha.append(a)
                     beta.append(b)
                 group['ns'].append(alpha,beta)
