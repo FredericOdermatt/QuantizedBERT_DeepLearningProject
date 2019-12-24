@@ -39,7 +39,6 @@ class INQScheduler(object):
         self.iterative_steps = iterative_steps
         self.strategy = strategy
         self.idx = 0
-        alpha =
 
         for group in self.optimizer.param_groups:
             group['ns'] = []
@@ -49,7 +48,7 @@ class INQScheduler(object):
                 if p.requires_grad is False:
                     group['ns'].append((0, 0))
                     continue
-                
+    
                 s = torch.max(torch.abs(p.data)).item()           
                 n_1 = math.floor(math.log((4*s)/3 + eps, 2))		#added epsilon, so as not to take log of zero
                 n_2 = int(n_1 + 1 - (2**(group['weight_bits']-1))/2)
@@ -93,13 +92,14 @@ class INQScheduler(object):
         """
         """Quantize a single weight using Linear quantization.
         """
-        """
+        
         scale = 2**-6
         k = math.floor(weight/scale + .5)
         unclamped_q_weight = scale * k
         quantized_weight = max(min(unclamped_q_weight, 127./64.), -127./64.)
-        """
+
         """Quantize a single weight using the INQ quantization scheme.
+        """
         """
         alpha = 0
         beta = 2 ** n_2
@@ -111,6 +111,7 @@ class INQScheduler(object):
                 quantized_weight = math.copysign(beta, weight)
             alpha = 2 ** i
             beta = 2 ** (i + 1)
+        """
         return quantized_weight
 
     def step(self):
