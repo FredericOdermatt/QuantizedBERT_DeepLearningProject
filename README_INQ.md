@@ -1,8 +1,12 @@
 # How to run:
-1. Write one of the two quantization schedulers to $INQ_ROOT/inq/quantization_scheduler.py
-2. run pip intall -e $INQ_ROOT/
-3. Copy run_glue_inq.py into $HUGGINGFACE_ROOT/transformets/examples/
-4. Run run_glue_inq.py like this:
+1. clone https://github.com/Mxbonn/INQ-pytorch
+2. Write one of the two quantization schedulers to $INQ_ROOT/inq/quantization_scheduler.py
+3. create venv
+4. pip install -e $INQ_ROOT/
+5. clone transformers
+6. Copy run_glue_inq.py into $HUGGINGFACE_ROOT/transformets/examples
+7. pip install -r requirements.txt (requirements.txt in transformers/examples I think)
+8. Run run_glue_inq.py like this:
     python ./run_glue_inq.py \\
     --model_type bert   \\   
     --model_name_or_path bert-base-uncased      \\
