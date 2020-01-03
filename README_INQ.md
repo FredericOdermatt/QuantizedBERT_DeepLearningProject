@@ -26,7 +26,7 @@
     
    # On leonhard
    
-   module load python_gpu/3.6.1
+   module load python_gpu/3.7.4
    
    module clone INQ-pytorch transformers QuantizedBERT_DeepLearningProject
    
@@ -34,7 +34,7 @@
    
    copy quantization_scheduler.py into INQ-Pytorch/inq
    
-   python3.6 -m venv .inq_env --system-site-packages
+   python -m venv .inq_env --system-site-packages
    
    enter venv
    
@@ -48,7 +48,7 @@
    
    Run run_glue_inq.py like this:
    
-   python ./run_glue_inq.py \\
+   python ./transformers/examples/run_glue_inq.py \\
    
     --model_type bert   \\   
     --model_name_or_path bert-base-uncased      \\
