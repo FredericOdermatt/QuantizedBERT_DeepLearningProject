@@ -108,7 +108,7 @@ def train(args, train_dataset, model, tokenizer):
         {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
         ]
 
-    optimizer = inq.SGD(optimizer_grouped_parameters, lr=args.learning_rate)
+    optimizer = inq.SGD(optimizer_grouped_parameters, lr=args.learning_rate,weight_bits=8)
     inq_sched = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
     inq_scheduler = inq.INQScheduler(optimizer, inq_sched, strategy="pruning")	#pruning or rand
     #optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
